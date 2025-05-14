@@ -289,7 +289,7 @@
         <div class="frame-container" id="frame-container">
             <iframe 
                 id="app-frame"
-                src="https://script.google.com/macros/s/AKfycbzJDpjl9xQhCoCICpMwQpwBuIsDxXSuhjBJdMf2dP6yW7TyMeFgFanB9YopJW32XQ6Zvw/exec"
+                src="https://script.google.com/macros/s/AKfycbyXoyqE8GIE59uy80DegAGg1F-XHolPeVOViVsQsYiOHS9CCfDhXg_vWFA0Z71NNW0d2A/exec"
                 allow="autoplay; camera; microphone; fullscreen"
                 allowfullscreen
                 loading="eager"
@@ -903,7 +903,7 @@ function forceGoogleAppsScriptUpdate() {
     }
     
     // URL base do seu Google Apps Script
-    const baseUrl = "https://script.google.com/macros/s/AKfycbzJDpjl9xQhCoCICpMwQpwBuIsDxXSuhjBJdMf2dP6yW7TyMeFgFanB9YopJW32XQ6Zvw/exec";
+    const baseUrl = "https://script.google.com/macros/s/AKfycbyXoyqE8GIE59uy80DegAGg1F-XHolPeVOViVsQsYiOHS9CCfDhXg_vWFA0Z71NNW0d2A/exec";
     
     // Adicionar parâmetros para evitar cache
     const timestamp = new Date().getTime();
@@ -922,6 +922,24 @@ function forceGoogleAppsScriptUpdate() {
         navigator.serviceWorker.controller.postMessage({
             type: 'clearCache',
             url: baseUrl
+        });
+    }
+    
+    // Limpar cache do navegador para esta URL específica
+    if ('caches' in window) {
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    return caches.open(cacheName).then(function(cache) {
+                        // Tentar excluir a URL específica de cada cache
+                        return cache.delete(baseUrl).then(function() {
+                            return cache.delete(fullUrl);
+                        });
+                    });
+                })
+            );
+        }).then(function() {
+            console.log('Cache limpo para a URL do GAS');
         });
     }
     
@@ -962,6 +980,7 @@ function forceGoogleAppsScriptUpdate() {
     // Salvar timestamp da atualização
     localStorage.setItem('lastGASUpdate', timestamp.toString());
 }
+
 
 // Função para mostrar toast de notificação
 function showToast(message) {
