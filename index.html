@@ -1,5 +1,5 @@
-            <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,38 +8,37 @@
     <!-- Meta tags -->
     <meta name="title" content="🎉 Festa Mickey & Minnie 🎂">
     <meta name="description" content="Festa de aniversário temática Mickey e Minnie Mouse">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="background-color" content="#ffffff">
+    
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="🎉 Festa Mickey & Minnie 🎂">
     <meta property="og:description" content="Celebração especial com Mickey e Minnie Mouse">
+    <meta property="og:image" content="./icons/icon-512x512.png">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Festa Mickey & Minnie">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Roboto:wght@300;400;500;700;900&display=swap');
-        
-        :root {
-            --boy-primary: #ff6b6b;
-            --boy-secondary: #4ecdc4;
-            --boy-accent: #45b7d1;
-            --girl-primary: #ff69b4;
-            --girl-secondary: #ffd1dc;
-            --girl-accent: #da70d6;
-        }
-        
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #ff69b4);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            font-family: Arial, sans-serif;
         }
         
         #app-container {
@@ -48,697 +47,157 @@
             position: relative;
         }
         
-        /* Seletor de tema */
-        .theme-selector {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1002;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .theme-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 3px solid white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        .theme-btn.boy {
-            background: linear-gradient(135deg, var(--boy-primary), var(--boy-accent));
-        }
-        
-        .theme-btn.girl {
-            background: linear-gradient(135deg, var(--girl-primary), var(--girl-accent));
-        }
-        
-        .theme-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-        
-        .theme-btn.active {
-            transform: scale(1.2);
-            animation: bounce 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1.2); }
-            40% { transform: translateY(-10px) scale(1.2); }
-            60% { transform: translateY(-5px) scale(1.2); }
-        }
-        
-        /* Container da foto do aniversariante */
-        .birthday-photo-container {
-            position: fixed;
-            top: 20px;
-            right: 100px;
-            z-index: 1002;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 4px solid white;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .birthday-photo-container:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
-        }
-        
-        .birthday-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-        
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff6b6b, #ff69b4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-        }
-        
-        .photo-input {
-            display: none;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* Container do iframe */
-        .frame-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: white;
-            z-index: 1;
-            border-radius: 20px;
-            margin: 10px;
-            width: calc(100% - 20px);
-            height: calc(100% - 20px);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
         iframe {
             width: 100%;
             height: 100%;
             border: none;
             background-color: white;
-            border-radius: 20px;
         }
         
-        /* Tela de carregamento animada */
-        #loading-screen {
+        /* Loading screen para PWA */
+        #pwa-loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #ff69b4 75%, #da70d6 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
+            background: linear-gradient(135deg, #ff6b6b, #ff69b4);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 9999;
             transition: opacity 0.5s ease;
         }
         
-        .loading-container {
+        .loading-content {
             text-align: center;
-            padding: 50px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            max-width: 90%;
-            animation: containerFloat 4s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-5px) rotate(1deg); }
-            50% { transform: translateY(-10px) rotate(0deg); }
-            75% { transform: translateY(-5px) rotate(-1deg); }
-        }
-        
-        .party-icons {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: partyBounce 2s infinite;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        @keyframes partyBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
-            10% { transform: translateY(-15px) rotate(5deg); }
-            30% { transform: translateY(-10px) rotate(-5deg); }
-            40% { transform: translateY(-20px) rotate(3deg); }
-            60% { transform: translateY(-8px) rotate(-3deg); }
-        }
-        
-        .loading-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 32px;
-            font-weight: 400;
-            background: linear-gradient(45deg, #ff6b6b, #ff69b4, #4ecdc4, #45b7d1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
-            to { filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8)); }
-        }
-        
-        .loading-subtitle {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-            animation: subtitlePulse 3s ease-in-out infinite;
-        }
-        
-        @keyframes subtitlePulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        .loading-spinner {
-            border: 6px solid rgba(255, 107, 107, 0.2);
-            border-top: 6px solid #ff6b6b;
-            border-right: 6px solid #ff69b4;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: rainbowSpin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes rainbowSpin {
-            0% { 
-                transform: rotate(0deg);
-                border-top-color: #ff6b6b;
-                border-right-color: #ff69b4;
-            }
-            25% { 
-                border-top-color: #4ecdc4;
-                border-right-color: #45b7d1;
-            }
-            50% { 
-                border-top-color: #45b7d1;
-                border-right-color: #da70d6;
-            }
-            75% { 
-                border-top-color: #da70d6;
-                border-right-color: #ff6b6b;
-            }
-            100% { 
-                transform: rotate(360deg);
-                border-top-color: #ff6b6b;
-                border-right-color: #ff69b4;
-            }
-        }
-        
-        /* Botão de atualização melhorado */
-        #refresh-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b6b, #ff69b4);
-            backdrop-filter: blur(10px);
-            border: 3px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-            cursor: pointer;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            animation: buttonPulse 3s infinite;
-        }
-        
-        @keyframes buttonPulse {
-            0%, 100% { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4); }
-            50% { box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6); }
-        }
-        
-        #refresh-button svg {
-            width: 28px;
-            height: 28px;
-            transition: transform 0.5s ease;
-            stroke: white;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-        
-        #refresh-button:hover {
-            background: linear-gradient(135deg, #ff69b4, #da70d6);
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
-        }
-        
-        #refresh-button:hover svg {
-            transform: rotate(180deg);
-        }
-        
-        #refresh-button.refreshing svg {
-            animation: rainbowSpin 1s linear infinite;
-        }
-        
-        /* Toast notification melhorado */
-        #toast-notification {
-            position: fixed;
-            bottom: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.95), rgba(255, 105, 180, 0.95));
-            backdrop-filter: blur(15px);
             color: white;
-            padding: 20px 40px;
-            border-radius: 30px;
-            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
-            z-index: 2000;
-            transition: all 0.4s ease;
-            opacity: 0;
-            font-size: 16px;
-            font-weight: 500;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: toastFloat 6s ease-in-out infinite;
         }
         
-        @keyframes toastFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(-3px); }
+        .loading-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s infinite;
         }
         
-        /* Confetes animados */
-        .confetti {
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Install button */
+        #install-button {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #ff6b6b;
-            animation: confettiFall 3s linear infinite;
-            z-index: 999;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff69b4);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            transition: all 0.3s ease;
         }
         
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Responsividade */
-        @media (max-width: 480px) {
-            .loading-title {
-                font-size: 24px;
-            }
-            
-            .loading-subtitle {
-                font-size: 14px;
-            }
-            
-            .party-icons {
-                font-size: 60px;
-            }
-            
-            .theme-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .birthday-photo-container {
-                width: 60px;
-                height: 60px;
-                right: 80px;
-            }
-            
-            #refresh-button {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .loading-container {
-                padding: 30px;
-                margin: 20px;
-            }
+        #install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
-    <div id="app-container">
-        <!-- Seletor de tema menino/menina -->
-        <div class="theme-selector">
-            <button class="theme-btn boy active" data-theme="boy" title="Tema para Menino">
-                🤴
-            </button>
-            <button class="theme-btn girl" data-theme="girl" title="Tema para Menina">
-                👸
-            </button>
+    <div id="pwa-loading">
+        <div class="loading-content">
+            <div class="loading-icon">🎉🐭🎂</div>
+            <div class="loading-text">Carregando Festa...</div>
         </div>
-        
-        <!-- Container da foto do aniversariante -->
-        <div class="birthday-photo-container" title="Clique para adicionar foto do aniversariante">
-            <input type="file" class="photo-input" id="photo-input" accept="image/*">
-            <div class="photo-placeholder" id="photo-placeholder">
-                📸
-            </div>
-        </div>
-        
-        <!-- Botão de atualização -->
-        <button id="refresh-button" title="Atualizar festa">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M23 4v6h-6"></path>
-                <path d="M1 20v-6h6"></path>
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
-                <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
-            </svg>
-        </button>
-        
-        <!-- Frame do aplicativo -->
-        <div class="frame-container" id="frame-container">
-            <iframe
-                id="app-frame"
-                src="https://script.google.com/macros/s/AKfycbyPOyQJ2BqdcOYWngMWX2_VDgyJIVJBxOs7PkdNyzube79bq1VPRCuNgHFF_soG2_6A/exec?usp=sharing"
-                allow="autoplay; camera; microphone; fullscreen"
-                allowfullscreen
-                loading="eager"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads allow-top-navigation">
-            </iframe>
-        </div>
-        
-        <!-- Tela de carregamento -->
-        <div id="loading-screen">
-            <div class="loading-container">
-                <div class="party-icons">
-                    <span>🎉</span>
-                    <span>🐭</span>
-                    <span>🎂</span>
-                    <span>🎈</span>
-                </div>
-                <div class="loading-title">Festa do Mickey & Minnie</div>
-                <div class="loading-subtitle">Preparando a festa de aniversário...</div>
-                <div class="loading-spinner"></div>
-            </div>
-        </div>
-        
-        <!-- Toast notification -->
-        <div id="toast-notification"></div>
     </div>
-
+    
+    <div id="app-container">
+        <iframe
+            id="app-frame"
+            src="https://script.google.com/macros/s/AKfycbyYSCvJE1x129UVR_iYTSqV7od2d22ey1O2Pq0e4lRAIqFyIbO5IdO95HICsxIFHSfZ/exec?usp=sharing"
+            allow="autoplay; camera; microphone; fullscreen"
+            allowfullscreen
+            loading="eager"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads allow-top-navigation">
+        </iframe>
+    </div>
+    
+    <button id="install-button">📱 Instalar App</button>
+    
     <script>
-        // Versão do app
-        const APP_VERSION = '2.0.0';
-        
-        // Elementos principais
-        const loadingScreen = document.getElementById('loading-screen');
-        const frameContainer = document.getElementById('frame-container');
-        const appFrame = document.getElementById('app-frame');
-        const refreshButton = document.getElementById('refresh-button');
-        const themeButtons = document.querySelectorAll('.theme-btn');
-        const photoInput = document.getElementById('photo-input');
-        const photoPlaceholder = document.getElementById('photo-placeholder');
-        const photoContainer = document.querySelector('.birthday-photo-container');
-        
-        // Variáveis de controle
-        let isFrameLoaded = false;
-        let loadingTimeout;
-        let currentTheme = 'boy';
-        let confettiInterval;
-        
-        // Cores dos temas
-        const themes = {
-            boy: {
-                primary: '#ff6b6b',
-                secondary: '#4ecdc4',
-                accent: '#45b7d1',
-                gradient: 'linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1)'
-            },
-            girl: {
-                primary: '#ff69b4',
-                secondary: '#ffd1dc',
-                accent: '#da70d6',
-                gradient: 'linear-gradient(135deg, #ff69b4, #ffd1dc, #da70d6)'
-            }
-        };
-        
-        // Função para criar confetes
-        function createConfetti() {
-            const colors = currentTheme === 'boy' 
-                ? ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd700'] 
-                : ['#ff69b4', '#ffd1dc', '#da70d6', '#ffd700'];
-            
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 2 + 's';
-                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 5000);
-                }, i * 100);
-            }
-        }
-        
-        // Função para aplicar tema
-        function applyTheme(theme) {
-            currentTheme = theme;
-            const themeColors = themes[theme];
-            
-            // Atualizar gradiente de fundo
-            document.body.style.background = themeColors.gradient;
-            document.body.style.backgroundSize = '400% 400%';
-            
-            // Atualizar tela de carregamento
-            loadingScreen.style.background = themeColors.gradient;
-            loadingScreen.style.backgroundSize = '400% 400%';
-            
-            // Atualizar botão de refresh
-            refreshButton.style.background = `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accent})`;
-            
-            // Atualizar toast
-            const toast = document.getElementById('toast-notification');
-            toast.style.background = `linear-gradient(135deg, ${themeColors.primary}95, ${themeColors.accent}95)`;
-            
-            // Atualizar placeholder da foto
-            photoPlaceholder.style.background = `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accent})`;
-            
-            // Criar confetes
-            createConfetti();
-        }
-        
-        // Função para mostrar notificação toast
-        function showToast(message, duration = 3000) {
-            const toast = document.getElementById('toast-notification');
-            toast.textContent = message;
-            toast.style.bottom = '30px';
-            toast.style.opacity = '1';
-            
-            setTimeout(() => {
-                toast.style.bottom = '-80px';
-                toast.style.opacity = '0';
-            }, duration);
-        }
-        
-        // Função para esconder a tela de carregamento
-        function hideLoadingScreen() {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-            clearTimeout(loadingTimeout);
-            
-            // Criar confetes de celebração
-            createConfetti();
-        }
-        
-        // Função para atualizar o aplicativo
-        function refreshApp() {
-            loadingScreen.style.display = 'flex';
-            loadingScreen.style.opacity = '1';
-            
-            // Adicionar classe de animação ao botão
-            refreshButton.classList.add('refreshing');
-            
-            // Atualizar o iframe
-            const timestamp = new Date().getTime();
-            const currentSrc = appFrame.src.split('?')[0];
-            appFrame.src = `${currentSrc}?v=${APP_VERSION}&t=${timestamp}`;
-            
-            // Mostrar toast
-            const themeMessage = currentTheme === 'boy' ? '🤴 Atualizando festa do Mickey...' : '👸 Atualizando festa da Minnie...';
-            showToast(themeMessage);
-            
-            // Remover classe após 2 segundos
-            setTimeout(() => {
-                refreshButton.classList.remove('refreshing');
-            }, 2000);
-            
-            // Criar confetes
-            createConfetti();
-        }
-        
-        // Função para carregar foto
-        function loadPhoto(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'birthday-photo';
-                img.alt = 'Foto do Aniversariante';
-                
-                // Substituir placeholder pela foto
-                photoPlaceholder.innerHTML = '';
-                photoPlaceholder.appendChild(img);
-                
-                // Salvar no localStorage
-                localStorage.setItem('birthdayPhoto', e.target.result);
-                
-                showToast('📸 Foto do aniversariante adicionada!');
-                createConfetti();
-            };
-            reader.readAsDataURL(file);
-        }
-        
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            // Aplicar tema inicial
-            applyTheme(currentTheme);
-            
-            // Carregar foto salva
-            const savedPhoto = localStorage.getItem('birthdayPhoto');
-            if (savedPhoto) {
-                const img = document.createElement('img');
-                img.src = savedPhoto;
-                img.className = 'birthday-photo';
-                img.alt = 'Foto do Aniversariante';
-                photoPlaceholder.innerHTML = '';
-                photoPlaceholder.appendChild(img);
-            }
-            
-            // Definir tempo máximo para carregamento
-            loadingTimeout = setTimeout(() => {
-                hideLoadingScreen();
-                const welcomeMessage = currentTheme === 'boy' ? '🤴 Festa do Mickey pronta!' : '👸 Festa da Minnie pronta!';
-                showToast(welcomeMessage);
-            }, 8000);
-            
-            // Iniciar confetes automáticos
-            confettiInterval = setInterval(createConfetti, 10000);
-        });
-        
-        // Eventos dos botões de tema
-        themeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remover classe active de todos os botões
-                themeButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Adicionar classe active ao botão clicado
-                button.classList.add('active');
-                
-                // Aplicar novo tema
-                const theme = button.dataset.theme;
-                applyTheme(theme);
-                
-                const themeMessage = theme === 'boy' ? '🤴 Tema Mickey ativado!' : '👸 Tema Minnie ativado!';
-                showToast(themeMessage);
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
             });
-        });
-        
-        // Evento para carregar foto
-        photoContainer.addEventListener('click', () => {
-            photoInput.click();
-        });
-        
-        photoInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                loadPhoto(file);
-            }
-        });
-        
-        // Evento quando o iframe carregar
-        appFrame.addEventListener('load', () => {
-            isFrameLoaded = true;
-            hideLoadingScreen();
-            const readyMessage = currentTheme === 'boy' ? '🎨 Mickey pronto para diversão!' : '🎨 Minnie pronta para diversão!';
-            showToast(readyMessage);
-        });
-        
-        // Evento para o botão de atualização
-        refreshButton.addEventListener('click', refreshApp);
-        
-        // Verificar se está online
-        window.addEventListener('offline', () => {
-            showToast('📡 Você está offline - Festa pausada!');
-        });
-        
-        window.addEventListener('online', () => {
-            showToast('🌐 Conectado novamente - Festa continua!');
-            if (isFrameLoaded) {
-                refreshApp();
-            }
-        });
-        
-        // Limpar intervalo ao sair da página
-        window.addEventListener('beforeunload', () => {
-            if (confettiInterval) {
-                clearInterval(confettiInterval);
-            }
-        });
-        
-        // Adicionar efeito de toque em dispositivos móveis
-        if ('ontouchstart' in window) {
-            document.addEventListener('touchstart', createConfetti);
         }
+        
+        // PWA Install
+        let deferredPrompt;
+        const installButton = document.getElementById('install-button');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+        
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            }
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installButton.style.display = 'none';
+        });
+        
+        // Hide loading screen when iframe loads
+        const iframe = document.getElementById('app-frame');
+        const loadingScreen = document.getElementById('pwa-loading');
+        
+        iframe.addEventListener('load', () => {
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // Fallback to hide loading after 5 seconds
+        setTimeout(() => {
+            if (loadingScreen.style.display !== 'none') {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        }, 5000);
     </script>
 </body>
 </html>
